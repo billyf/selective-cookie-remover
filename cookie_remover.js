@@ -7,6 +7,13 @@ var cookieRemover = {
         for (var i in domainsToRemove) {
             this.removeCookiesFromDomain(domainsToRemove[i], mockRun);
         }
+
+        if (!mockRun) {
+            // TODO ideal solution would wait for all cookies.remove callbacks
+            setTimeout(domainRows.updateMatchCounts, 300);
+            setTimeout(domainRows.updateMatchCounts, 2000);
+            setTimeout(domainRows.updateMatchCounts, 5000);
+        }
     },
 
     removeCookiesFromDomain: function (domain, mockRun) {
