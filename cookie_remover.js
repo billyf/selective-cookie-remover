@@ -53,11 +53,12 @@ var feedback = {
 
 var domainRows = {
     addRow: function (domainText) {
-        var newRow = '<span class="domainSpan">'
+        var newRow = '<div class="domainSpan">'
             + '<input type="checkbox" class="cookieCheckbox" checked />'
             + '<input type="text" value="' + domainText + '" />'
             + '<a href="#" class="removeRow"><img src="img/minus.png"/></a>'
-            + '<br/></span>';
+            + '<span class="matchCount"></span>'
+            + '<br/></div>';
         $("#addRow").before(newRow);
     },
 
@@ -68,11 +69,22 @@ var domainRows = {
     getDomainList: function(onlyChecked) {
         var spans;
         if (onlyChecked) {
-            spans = $("span.domainSpan input:checked").parent().find("input:text");
+            spans = $("div.domainSpan input:checked").parent().find("input:text");
         } else {
-            spans = $("span.domainSpan input:text");
+            spans = $("div.domainSpan input:text");
         }
         return $.map(spans, function (el) { return $(el).val() });
+    },
+
+    updateMatchCounts: function() {
+        $("div.domainSpan").each(function(index, el) {
+            var domain = $(el).find("input:text").val();
+            chrome.cookies.getAll({"domain": domain}, function (arrayOfCookies) {
+                var matchCount = arrayOfCookies.length;
+                var text = matchCount + ' match' + (matchCount != 1 ? 'es' : '');
+                $(el).find("span.matchCount").text(text);
+            });
+        });
     }
 };
 
@@ -105,6 +117,7 @@ var storage = {
             if (savedData.domainList && savedData.domainList.length) {
                 $("#defaultDomainSpan").remove();
             }
+            domainRows.updateMatchCounts();
         });
     }
 };
@@ -130,8 +143,9 @@ $(document).ready(function(){
         storage.saveDomainList();
     });
     
-    $(document).on("input", "span.domainSpan input:text", function() {
+    $(document).on("input", "div.domainSpan input:text", function() {
         storage.needsSaving();
+        domainRows.updateMatchCounts();
     });
     
     storage.loadDomainList();

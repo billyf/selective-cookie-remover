@@ -11,10 +11,17 @@
         vertical-align: middle;
         width: 20px;
         height: 20px;
+        margin-top: -5px;
+        margin-left: 6px;
+        margin-right: 10px;
       }
       
       li {
         margin: 5px;
+      }
+
+      div.domainSpan {
+        margin: 5px 0px 5px 0px;
       }
       
       input.cookieCheckbox {
@@ -23,13 +30,15 @@
       }
 
       #plusButton {
-        margin-top: -5px;
         margin-left: 12px;
-        margin-right: 5px;
       }
 
       span.deleteHeader {
-        margin-right: 70px;
+        margin-right: 55px;
+      }
+
+      span.matchCount {
+        color: darkslateblue;
       }
 
       #removeCookies {
@@ -46,10 +55,16 @@
   </head>
   <body>
     <p style="font-size: medium">Enter cookie domains to remove:</p>
-    <p style="font-size: small; font-style: italic;">Note: subdomains are also removed.<br/>Entering test.com removes abc.test.com</p>
+    <p style="font-size: small;">Note: sub-domains are also removed.<br/>Entering <i>test.com</i> removes <i>abc.test.com</i></p>
     <span class="deleteHeader">Enabled</span><span>Root Domain</span><br/>
     <form action="#" id="cookieDomainForm">
-        <span id="defaultDomainSpan" class="domainSpan"><input type="checkbox" class="cookieCheckbox" checked><input type="text" value="test.com"><a href="#" class="removeRow"><img src="img/minus.png"/></a><br/></span>
+        <div id="defaultDomainSpan" class="domainSpan">
+          <input type="checkbox" class="cookieCheckbox" checked>
+          <input type="text" value="test.com">
+          <a href="#" class="removeRow"><img src="img/minus.png"/></a>
+          <span class="matchCount"></span>
+          <br/>
+        </div>
         <a href="#" id="addRow"><img src="img/plus.png" id="plusButton"/>Add new row</a><br/><br/>
         <input type="button" id="removeCookies" value="Remove cookies"><br/>
         <label><input type="checkbox" id="mockRun">Test mode (mock run - doesn't delete)</label>
