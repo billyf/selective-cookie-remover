@@ -57,7 +57,7 @@ var domainRows = {
             + '<input type="checkbox" class="cookieCheckbox" checked />'
             + '<input type="text" value="' + domainText + '" />'
             + '<a href="#" class="removeRow"><img src="img/minus.png"/></a>'
-            + '<span class="matchCount"></span>'
+            + '<a href="#" class="matchCount"></a>'
             + '</div>';
         $("#addRow").before(newRow);
     },
@@ -82,7 +82,7 @@ var domainRows = {
             chrome.cookies.getAll({"domain": domain}, function (arrayOfCookies) {
                 var matchCount = arrayOfCookies.length;
                 var text = matchCount + ' match' + (matchCount != 1 ? 'es' : '');
-                $(el).find("span.matchCount").text(text);
+                $(el).find("a.matchCount").text(text);
             });
         });
     }
@@ -147,6 +147,13 @@ $(document).ready(function(){
         storage.needsSaving();
         domainRows.updateMatchCounts();
     });
-    
+
+    $(document).on("click", "a.matchCount", function() {
+        var domain = $(this).parent().find("input:text").val();
+        feedback.updateHeader("Cookies matching " + domain + ":");
+        feedback.clearOutputList();
+        cookieRemover.removeCookiesFromDomain(domain, true);
+    });
+
     storage.loadDomainList();
 });

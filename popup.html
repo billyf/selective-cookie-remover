@@ -45,7 +45,7 @@
         margin-right: 55px;
       }
 
-      span.matchCount {
+      a.matchCount {
         color: darkslateblue;
       }
 
@@ -68,6 +68,10 @@
         right: 5px;
         top: 5px;
       }
+
+      #outputHeader {
+        font-weight: bold;
+      }
     </style>
 
     <script src="lib/jquery-2.1.3.min.js"></script>
@@ -82,7 +86,7 @@
           <input type="checkbox" class="cookieCheckbox" checked>
           <input type="text" value="test.com">
           <a href="#" class="removeRow"><img src="img/minus.png"/></a>
-          <span class="matchCount"></span>
+          <a href="#" class="matchCount"></a>
         </div>
         <a href="#" id="addRow"><img src="img/plus.png" id="plusButton"/>Add new row</a><br/><br/>
         <input type="button" id="removeCookies" value="Remove matching cookies"><br/>
