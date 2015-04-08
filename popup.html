@@ -29,11 +29,19 @@
         margin-right: 30px;
       }
 
-      #plusButton {
-        margin-left: 12px;
+      #addRow {
+        background-color: azure;
+        display: inline-block;
+        margin-top: 8px;
+        margin-left: 10px;
+        border: solid 1px black;
+        border-radius: 5px;
+        padding: 2px 4px 2px 0px;
+        text-decoration: none;
+        color: black;
       }
 
-      span.deleteHeader {
+      span.columnHeader {
         margin-right: 55px;
       }
 
@@ -48,6 +56,18 @@
       #mockRun {
         vertical-align: -2px;
       }
+
+      p.note {
+        color: #616E14;
+        background-color: #DAE690;
+        border: solid 1px #BFD62F;
+        border-radius: 2px;
+        padding: 6px 6px;
+        width: 30%;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+      }
     </style>
 
     <script src="lib/jquery-2.1.3.min.js"></script>
@@ -55,18 +75,17 @@
   </head>
   <body>
     <p style="font-size: medium">Enter cookie domains to remove:</p>
-    <p style="font-size: small;">Note: sub-domains are also removed.<br/>Entering <i>test.com</i> removes <i>abc.test.com</i></p>
-    <span class="deleteHeader">Enabled</span><span>Root Domain</span><br/>
+    <p class="note">Note: sub-domains are also removed. Entering <i>test.com</i> removes <i>abc.test.com</i> also.</p>
+    <span class="columnHeader">Enabled</span><span>Root Domain</span><br/>
     <form action="#" id="cookieDomainForm">
         <div id="defaultDomainSpan" class="domainSpan">
           <input type="checkbox" class="cookieCheckbox" checked>
           <input type="text" value="test.com">
           <a href="#" class="removeRow"><img src="img/minus.png"/></a>
           <span class="matchCount"></span>
-          <br/>
         </div>
         <a href="#" id="addRow"><img src="img/plus.png" id="plusButton"/>Add new row</a><br/><br/>
-        <input type="button" id="removeCookies" value="Remove cookies"><br/>
+        <input type="button" id="removeCookies" value="Remove matching cookies"><br/>
         <label><input type="checkbox" id="mockRun">Test mode (mock run - doesn't delete)</label>
     </form>
     <br/>

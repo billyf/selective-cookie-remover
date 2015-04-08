@@ -58,7 +58,7 @@ var domainRows = {
             + '<input type="text" value="' + domainText + '" />'
             + '<a href="#" class="removeRow"><img src="img/minus.png"/></a>'
             + '<span class="matchCount"></span>'
-            + '<br/></div>';
+            + '</div>';
         $("#addRow").before(newRow);
     },
 
@@ -135,7 +135,7 @@ $(document).ready(function(){
 
     $("#mockRun").on("change", function() {
         var isChecked = $(this).is(":checked");
-        $("#removeCookies").val(isChecked ? "Find matching cookies" : "Remove cookies");
+        $("#removeCookies").val(isChecked ? "Find matching cookies" : "Remove matching cookies");
     });
     
     $(document).on("click", "a.removeRow", function () {
